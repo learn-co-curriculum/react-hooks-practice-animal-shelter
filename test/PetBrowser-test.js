@@ -2,89 +2,33 @@ const React = require('react');
 const {shallow} = require('enzyme');
 const sinon = require('sinon');
 
+const { getAll } = require('../data/pets');
 const Pet = require('../components/Pet');
+const PetBrowser = require('../components/PetBrowser');
 
-const MALE_DOG = {
-  "id": "9e7cc723-d7f5-440d-8ead-c311e68014ee",
-  "type": "dog",
-  "gender": "male",
-  "age": 8,
-  "weight": 6,
-  "name": "Kennedy"
-};
+const ALL_PETS = getAll();
+const ADOPTED_PETS = [ALL_PETS[0].id];
 
-const FEMALE_CAT = {
-  "id": "86520b4b-7849-4462-b511-cddc7f416ad6",
-  "type": "cat",
-  "gender": "female",
-  "age": 7,
-  "weight": 6,
-  "name": "Cuddles"
-};
-
-const GENDER_ICON_MALE = '♂';
-const GENDER_ICON_FEMALE = '♀';
-
-describe('<Pet />', function () {
-  describe('Rendering props', function () {
-    it('should render the name', function () {
-      const wrapper = shallow(<Pet pet={MALE_DOG} />);
-      expect(wrapper.text().includes(MALE_DOG.name)).toBeTruthy();
-    });
-
-    it('should render the correct gender icon for male pets', function () {
-      const wrapper = shallow(<Pet pet={MALE_DOG} />);
-      expect(wrapper.text().includes(GENDER_ICON_MALE) && !wrapper.text().includes(GENDER_ICON_FEMALE)).toBeTruthy();
-    });
-
-    it('should render the correct gender icon for male pets', function () {
-      const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-      expect(wrapper.text().includes(GENDER_ICON_FEMALE) && !wrapper.text().includes(GENDER_ICON_MALE)).toBeTruthy();
-    });
-
-    it('should render the pet type', function () {
-      const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-      expect(wrapper.text().includes(FEMALE_CAT.type)).toBeTruthy();
-    });
-
-    it('should render the pet age', function () {
-      const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-      expect(wrapper.text().includes(FEMALE_CAT.age)).toBeTruthy();
-    });
-
-    it('should render the pet weight', function () {
-      const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-      expect(wrapper.text().includes(FEMALE_CAT.weight)).toBeTruthy();
-    });
+describe.only('<PetBrowser />', function () {
+  it('should render Pet components based on its props', function () {
+    const wrapper = shallow(<PetBrowser pets={ALL_PETS} adoptedPets={ADOPTED_PETS} />);
+    expect(wrapper.find(Pet).length).toEqual(ALL_PETS.length);
   });
 
-  describe('Adopting a pet', function () {
-    describe('Pet is not adopted yet', function () {
-      it('should only show the adopt button', function () {
-        const wrapper = shallow(<Pet pet={FEMALE_CAT} isAdopted={false} />);
-        expect(wrapper.find('button.ui.primary.button').length === 1 && wrapper.find('button.ui.disabled.button').length === 0).toBeTruthy();
-      });
+  it('should pass an `onAdoptPet` callback prop to its children Pet components', function () {
+    const noop = () => {};
+    const wrapper = shallow(<PetBrowser pets={ALL_PETS} adoptedPets={ADOPTED_PETS} onAdoptPet={noop} />);
+    expect(wrapper.find(Pet).nodes.every(node => node.props.onAdoptPet === noop)).toBeTruthy();
+  });
 
-      it('should call the `onAdoptPet` callback prop when the adopt button is clicked', function () {
-        const spy = sinon.spy();
-        const wrapper = shallow(<Pet pet={FEMALE_CAT} isAdopted={false} onAdoptPet={spy} />);
-        wrapper.find('button.ui.primary.button').simulate('click');
-        expect(spy.calledOnce).toBeTruthy();
-      });
-    });
+  it('should pass an `isAdopted` prop to its children Pet components', function () {
+    const wrapper = shallow(<PetBrowser pets={ALL_PETS} adoptedPets={ADOPTED_PETS} />);
+    expect(wrapper.find(Pet).nodes.every(node => node.props.isAdopted !== undefined)).toBeTruthy();
+  });
 
-    describe('Pet is already adopted', function () {
-      it('should only show the already adopted button', function () {
-        const wrapper = shallow(<Pet pet={FEMALE_CAT} isAdopted={true} />);
-        expect(wrapper.find('button.ui.disabled.button').length === 1 && wrapper.find('button.ui.primary.button').length === 0).toBeTruthy();
-      });
-
-      it('should not call the `onAdoptPet` callback prop when the button is clicked', function () {
-        const spy = sinon.spy();
-        const wrapper = shallow(<Pet pet={FEMALE_CAT} isAdopted={true} onAdoptPet={spy} />);
-        wrapper.find('button.ui.disabled.button').simulate('click');
-        expect(spy.called).toBeFalsy();
-      });
-    });
+  it('should determine the `isAdopted` prop for its children based on its `adoptedPets` prop', function () {
+    const wrapper = shallow(<PetBrowser pets={ALL_PETS} adoptedPets={ADOPTED_PETS} />);
+    expect(wrapper.find(Pet).nodes[0].props.isAdopted).toBeTruthy();
+    expect(wrapper.find(Pet).nodes.slice(1).every(node => node.props.isAdopted === false)).toBeTruthy();
   });
 });
