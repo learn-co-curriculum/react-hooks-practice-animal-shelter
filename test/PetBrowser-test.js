@@ -9,7 +9,7 @@ const PetBrowser = require('../components/PetBrowser');
 const ALL_PETS = getAll();
 const ADOPTED_PETS = [ALL_PETS[0].id];
 
-describe.only('<PetBrowser />', function () {
+describe('<PetBrowser />', function () {
   it('should render Pet components based on its props', function () {
     const wrapper = shallow(<PetBrowser pets={ALL_PETS} adoptedPets={ADOPTED_PETS} />);
     expect(wrapper.find(Pet).length).toEqual(ALL_PETS.length);
