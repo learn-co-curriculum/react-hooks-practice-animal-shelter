@@ -17,30 +17,12 @@ var Pet = function (_React$Component) {
   function Pet() {
     _classCallCheck(this, Pet);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Pet).call(this));
-
-    _this.handleAdoptPet = _this.handleAdoptPet.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Pet).call(this));
   }
 
   _createClass(Pet, [{
-    key: "handleAdoptPet",
-    value: function handleAdoptPet() {
-      this.props.onAdoptPet(this.props.pet.id);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _props = this.props;
-      var pet = _props.pet;
-      var isAdopted = _props.isAdopted;
-      var name = pet.name;
-      var type = pet.type;
-      var gender = pet.gender;
-      var age = pet.age;
-      var weight = pet.weight;
-
-
       return React.createElement(
         "div",
         { className: "card" },
@@ -50,9 +32,7 @@ var Pet = function (_React$Component) {
           React.createElement(
             "a",
             { className: "header" },
-            name,
-            " ",
-            gender === 'male' ? '♂' : '♀'
+            "Pet name (gender: ♂ or ♀)"
           ),
           React.createElement(
             "div",
@@ -60,7 +40,7 @@ var Pet = function (_React$Component) {
             React.createElement(
               "span",
               { className: "date" },
-              type
+              "Pet type"
             )
           ),
           React.createElement(
@@ -69,26 +49,24 @@ var Pet = function (_React$Component) {
             React.createElement(
               "p",
               null,
-              "Age: ",
-              age
+              "Age: "
             ),
             React.createElement(
               "p",
               null,
-              "Weight: ",
-              weight
+              "Weight: "
             )
           )
         ),
         React.createElement(
           "div",
           { className: "extra content" },
-          !isAdopted && React.createElement(
+          React.createElement(
             "button",
-            { className: "ui primary button", onClick: this.handleAdoptPet },
+            { className: "ui primary button" },
             "Adopt pet"
           ),
-          isAdopted && React.createElement(
+          React.createElement(
             "button",
             { className: "ui disabled button" },
             "Already adopted"
