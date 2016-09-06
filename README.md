@@ -47,10 +47,10 @@ button.
 ### `App`
 1. The app's initial state is already defined. Pass the right state properties to the `<Filters />` and `<PetBrowser />`
 components.
-2. When the `<Filters />` component calls the `onChangeType` prop you pass into it, the state needs to be updated
+2. When the `<Filters />` component calls the `onChangeType` prop you pass into it, `<App />`'s state needs to be updated
 accordingly.
-3. When the `<Filters />` component calls the `onFindPetsClick` prop you pass into it, fetch a list of pets using
-`fetch`.
+3. When the `<Filters />` component calls the `onFindPetsClick` prop you pass into it, the `<App />` component should
+fetch a list of pets using `fetch`.
     1. The URL of the API is `/api/pets` with an optional query parameter.
     2. If the `type` is `'all'`, send a request to `/api/pets`.
     3. If the `type` is `'cat'`, send a request to `/api/pets?type=cat`. Do the same thing for `dog` and `micropig`.
