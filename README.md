@@ -25,7 +25,7 @@ Starting with the smallest one and working our way up:
 1. Should have a `pet` prop. Use the attributes in this data to render the pet card correctly. It
 should show the pet's `name`, `type`, `age` and `weight`. Based on the pet's `type`, the component also needs to contain
 either a male (`♂`) or female (`♀`) symbol.
-2. Should have an `isAdopted` prop. Using this prop, render the correct button in the pet's card: if
+2. Should have an `isAdopted` prop. Using this prop, render the correct button in the pet's card; if
 the pet is adopted, show the disabled button. Otherwise, show the primary button to adopt the pet.
 2. Should have an `onAdoptPet` callback prop. This callback prop gets called with the pet's `id` when the user clicks
 the adopt pet button — _not_ when they click the disabled button!
