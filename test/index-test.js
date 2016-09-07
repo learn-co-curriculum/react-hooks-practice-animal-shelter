@@ -1,2 +1,4 @@
-const React = require('react');
-const { shallow } = require('enzyme');
+require('./Pet-test');
+require('./PetBrowser-test');
+require('./Filters-test');
+require('./App-test');
