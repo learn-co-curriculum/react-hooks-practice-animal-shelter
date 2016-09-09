@@ -1,10 +1,8 @@
 # React Props and State Lab
 
-## Objectives
+## Overview
 
-1. Practice building a small React application
-2. Practice updating state in response to an XHR payload
-3. Practice passing props among components to handle updates
+You'll build a small React application where you'll update state in response to an XHR payload and pass props among components to handle updates. 
 
 ## Animal Shelter
 ![Best Friends](https://media.giphy.com/media/xTiTnz5OOUn49wKbg4/giphy.gif)
@@ -62,5 +60,6 @@ fetch a list of pets using `fetch`.
 means it's important to use the _exact_ URLs as described above, or your tests will fail!**
 
 ## Resources
+
 - [Forms](https://facebook.github.io/react/docs/forms.html)
 - [Events](https://facebook.github.io/react/docs/events.html)
