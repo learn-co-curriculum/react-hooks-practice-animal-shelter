@@ -14,7 +14,7 @@ On a high level, you will be working on several components that form the UI of t
 There are several components that need your attention. All of these components can be found in the `components/` folder. Starting with the smallest one and working our way up:
 
 ### `Pet`
-1. Should have a `pet` prop. Use the attributes in this data to render the pet card correctly. It should show the pet's `name`, `type`, `age` and `weight`. Based on the pet's `type`, the component also needs to contain either a male (`♂`) or female (`♀`) symbol.
+1. Should have a `pet` prop. Use the attributes in this data to render the pet card correctly. It should show the pet's `name`, `type`, `age` and `weight`. Based on the pet's `gender`, the component also needs to contain either a male (`♂`) or female (`♀`) symbol.
 2. Should have an `isAdopted` prop. Using this prop, render the correct button in the pet's card; if the pet is adopted, show the disabled button. Otherwise, show the primary button to adopt the pet.
 2. Should have an `onAdoptPet` callback prop. This callback prop gets called with the pet's `id` when the user clicks the adopt pet button — _not_ when they click the disabled button!
 
@@ -44,3 +44,5 @@ There are several components that need your attention. All of these components c
 
 - [Forms](https://facebook.github.io/react/docs/forms.html)
 - [Events](https://facebook.github.io/react/docs/events.html)
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/react-props-and-state-lab'>Props And State Lab</a> on Learn.co and start learning to code for free.</p>
