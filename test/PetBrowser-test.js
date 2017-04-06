@@ -1,10 +1,10 @@
-const React = require('react');
-const {shallow} = require('enzyme');
-const sinon = require('sinon');
+import React from 'react';
+import {shallow} from 'enzyme';
+import sinon from 'sinon';
 
-const { getAll } = require('../data/pets');
-const Pet = require('../components/Pet');
-const PetBrowser = require('../components/PetBrowser');
+import { getAll } from '../data/pets';
+import Pet from '../components/Pet';
+import PetBrowser from '../components/PetBrowser';
 
 const ALL_PETS = getAll();
 const ADOPTED_PETS = [ALL_PETS[0].id];

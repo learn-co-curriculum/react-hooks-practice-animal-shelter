@@ -1,9 +1,9 @@
-const React = require('react');
+import React from 'react';
 
-const Filters = require('./Filters');
-const PetBrowser = require('./PetBrowser');
+import Filters from './Filters';
+import PetBrowser from './PetBrowser';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
 
@@ -36,5 +36,3 @@ class App extends React.Component {
     );
   }
 }
-
-module.exports = App;

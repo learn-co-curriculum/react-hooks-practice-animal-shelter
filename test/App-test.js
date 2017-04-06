@@ -1,11 +1,11 @@
-const React = require('react');
-const {shallow} = require('enzyme');
-const sinon = require('sinon');
+import React from 'react';
+import {shallow} from 'enzyme';
+import sinon from 'sinon';
 
-const fetchMock = require('../fetch-setup');
-const App = require('../components/App');
-const Filters = require('../components/Filters');
-const PetBrowser = require('../components/PetBrowser');
+import fetchMock from '../fetch-setup';
+import App from '../components/App';
+import Filters from '../components/Filters';
+import PetBrowser from '../components/PetBrowser';
 
 describe('<App />', function () {
   describe('Filters', function () {

@@ -1,8 +1,8 @@
-const React = require('react');
-const {shallow} = require('enzyme');
-const sinon = require('sinon');
+import React from 'react';
+import {shallow} from 'enzyme';
+import sinon from 'sinon';
 
-const Filters = require('../components/Filters');
+import Filters from '../components/Filters';
 
 const FILTERS_STATE = {
   type: 'all',

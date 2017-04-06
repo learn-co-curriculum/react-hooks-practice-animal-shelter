@@ -1,8 +1,8 @@
-const React = require('react');
-const {shallow} = require('enzyme');
-const sinon = require('sinon');
+import React from 'react';
+import {shallow} from 'enzyme';
+import sinon from 'sinon';
 
-const Pet = require('../components/Pet');
+import Pet from '../components/Pet';
 
 const MALE_DOG = {
   "id": "9e7cc723-d7f5-440d-8ead-c311e68014ee",
