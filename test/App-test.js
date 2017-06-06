@@ -1,33 +1,34 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import fetchMock from '../fetch-setup';
-import App from '../components/App';
-import Filters from '../components/Filters';
-import PetBrowser from '../components/PetBrowser';
+import fetchMock from '../src/fetch-setup';
+import App from '../src/components/App';
+import Filters from '../src/components/Filters';
+import PetBrowser from '../src/components/PetBrowser';
 
-describe('<App />', function () {
-  describe('Filters', function () {
-    it('should change filter type', function () {
+describe('<App />', () => {
+  describe('Filters', () => {
+    it('should change filter type', () => {
       const wrapper = shallow(<App />);
       wrapper.find(Filters).props().onChangeType('micropig');
-      expect(wrapper.state().filters.type).toEqual('micropig');
+      expect(wrapper.state().filters.type).to.equal('micropig');
     });
   });
 
-  describe('Fetching pets', function () {
+  describe('Fetching pets', () => {
     beforeEach(() => {
       fetchMock.reset();
     });
 
-    it('should fetch all pets by default', function () {
+    it('should fetch all pets by default', () => {
       const wrapper = shallow(<App />);
       wrapper.find(Filters).props().onFindPetsClick();
-      expect(fetchMock.called('/api/pets')).toBeTruthy('The right API URL is not being fetched when finding pets.');
+      expect(fetchMock.called('/api/pets'), 'The right API URL is not being fetched when finding pets.').to.be.true;
     });
 
-    it('should fetch pet types using the type parameter based on the filter', function () {
+    it('should fetch pet types using the type parameter based on the filter', () => {
       const wrapper = shallow(<App />);
 
       ['cat', 'dog', 'micropig'].forEach((type) => {
@@ -37,16 +38,16 @@ describe('<App />', function () {
           })
         });
         wrapper.find(Filters).props().onFindPetsClick();
-        expect(fetchMock.called(`/api/pets?type=${type}`)).toBeTruthy('The right API URL is not being fetched when finding pets.');
+        expect(fetchMock.called(`/api/pets?type=${type}`), 'The right API URL is not being fetched when finding pets.').to.be.true;
       });
     });
   });
 
-  describe('Adopting pets', function () {
-    it('should add an adopted pet ID to the state', function () {
+  describe('Adopting pets', () => {
+    it('should add an adopted pet ID to the state', () => {
       const wrapper = shallow(<App />);
       wrapper.find(PetBrowser).props().onAdoptPet('somePetId');
-      expect(wrapper.state().adoptedPets).toEqual(['somePetId']);
+      expect(wrapper.state().adoptedPets).to.deep.equal(['somePetId']);
     });
   });
 });
