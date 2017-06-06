@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 class Pet extends React.Component {
   constructor() {
@@ -27,4 +27,4 @@ class Pet extends React.Component {
   }
 }
 
-module.exports = Pet;
+export default Pet;

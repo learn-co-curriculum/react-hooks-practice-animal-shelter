@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-require('./fetch-setup');
-
 import App from './components/App';
+import('./fetch-setup');
 
 ReactDOM.render(
   <App />,
