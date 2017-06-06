@@ -6,7 +6,5 @@ import App from './components/App';
 
 ReactDOM.render(
   <App />,
-  document.getElementById('main')
+  document.getElementById('root')
 );
-
-require('./test/index-test.js'); // Leave this in!
