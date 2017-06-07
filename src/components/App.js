@@ -3,7 +3,7 @@ import React from 'react';
 import Filters from './Filters';
 import PetBrowser from './PetBrowser';
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
 
@@ -36,3 +36,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default App;

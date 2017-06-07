@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-require('./fetch-setup');
-
 import App from './components/App';
+import './fetch-setup';
 
 ReactDOM.render(
   <App />,
-  document.getElementById('main')
+  document.getElementById('root')
 );
-
-require('./test/index-test.js'); // Leave this in!

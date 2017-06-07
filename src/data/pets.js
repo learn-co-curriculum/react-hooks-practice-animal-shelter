@@ -281,8 +281,6 @@ const allPets = [
   }
 ];
 
-module.exports = {
-  getAll: () => allPets,
-  getByType: (type) => allPets.filter(p => p.type === type),
-  getBetweenAge: (from, to) => allPets.filter(p => p.age >= from && p.age <= to),
-};
+export const getAll = () => allPets;
+export const getByType = type => allPets.filter(pet => pet.type === type);
+export const getBetweenAge = (from, to) => allPets.filter(pet => pet.age >= from && pet.age <= to);

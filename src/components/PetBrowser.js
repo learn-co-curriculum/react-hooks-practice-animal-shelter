@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-const Pet = require('./Pet');
+import Pet from './Pet';
 
 class PetBrowser extends React.Component {
   render() {
@@ -12,4 +12,4 @@ class PetBrowser extends React.Component {
   }
 }
 
-module.exports = PetBrowser;
+export default PetBrowser;

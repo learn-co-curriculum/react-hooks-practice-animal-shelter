@@ -1,35 +1,36 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import Filters from '../components/Filters';
+import Filters from '../src/components/Filters';
 
 const FILTERS_STATE = {
   type: 'all',
 };
 
-describe('<Filters />', function () {
-  describe('Animal type', function () {
-    it('should set the value of the animal type select to the right filter value', function () {
+describe('<Filters />', () => {
+  describe('Animal type', () => {
+    it('should set the value of the animal type select to the right filter value', () => {
       const wrapper = shallow(<Filters filters={Object.assign({}, FILTERS_STATE, { type: 'micropig' })}/>);
-      expect(wrapper.find('select').props().value).toEqual('micropig');
+      expect(wrapper.find('select').props().value).to.equal('micropig');
     });
 
-    it('should call the `onChangeType` prop callback when the animal type select changes', function () {
+    it('should call the `onChangeType` prop callback when the animal type select changes', () => {
       const spy = sinon.spy();
       const wrapper = shallow(<Filters onChangeType={spy} filters={FILTERS_STATE}/>);
       wrapper.find('select').simulate('change', {target: {value: 'dog'}});
-      expect(spy.calledOnce).toBeTruthy();
-      expect(spy.firstCall.args[0]).toEqual('dog');
+      expect(spy.calledOnce).to.be.true;
+      expect(spy.firstCall.args[0]).to.equal('dog');
     });
   });
 
-  describe('Finding pets', function () {
-    it('should call the `onFindPetsClick` callback prop when the "Find pets" button is clicked', function () {
+  describe('Finding pets', () => {
+    it('should call the `onFindPetsClick` callback prop when the "Find pets" button is clicked', () => {
       const spy = sinon.spy();
       const wrapper = shallow(<Filters onFindPetsClick={spy} filters={FILTERS_STATE}/>);
       wrapper.find('button.secondary.button').simulate('click');
-      expect(spy.calledOnce).toBeTruthy();
+      expect(spy.calledOnce).to.be.true;
     });
   });
 });
