@@ -5,5 +5,5 @@ import './fetch-setup';
 
 ReactDOM.render(
   <App />,
-  document.getElementById('root')
+  document.getElementById('global')
 );

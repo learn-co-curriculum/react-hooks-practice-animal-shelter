@@ -1,9 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import sinon from 'sinon';
-
+import Adapter from 'enzyme-adapter-react-16';
 import Pet from '../src/components/Pet';
+
+Enzyme.configure({ adapter: new Adapter() })
 
 const MALE_DOG = {
   "id": "9e7cc723-d7f5-440d-8ead-c311e68014ee",
