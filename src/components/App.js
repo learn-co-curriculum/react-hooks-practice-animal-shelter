@@ -9,7 +9,6 @@ class App extends React.Component {
 
     this.state = {
       pets: [],
-      // adoptedPets: [],
       filters: {
         type: 'all',
       },
@@ -29,12 +28,10 @@ class App extends React.Component {
   };
 
   onChangeType = animal => {
-    this.setState({ ...this.state.filters, ...{ type: animal } });
+    this.setState({ filters: { ...this.state.filters, type: animal } });
   };
 
   onAdoptPet = petId => {
-    // Array.prototype.map returns a copy of pets
-    // if we find the target pet, return a copy of it where isAdopted is true using the spread operator
     const pets = this.state.pets.map(p => (p.id === petId ? { ...p, isAdopted: true } : p));
     this.setState({ pets });
   };

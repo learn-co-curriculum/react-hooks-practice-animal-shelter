@@ -61,13 +61,28 @@ describe('<App />', () => {
   });
 
   describe('Adopting pets', () => {
-    it('should add an adopted pet to the state', () => {
+    let trident;
+    beforeEach(() => {
+      trident = {
+        id: '5c142d9e-ea45-4231-8146-cccf71c704c0',
+        type: 'dog',
+        gender: 'male',
+        age: 4,
+        weight: 1,
+        name: 'Trident',
+        isAdopted: false,
+      };
+    });
+
+    it('should toggle a pets adopted status', () => {
       const wrapper = shallow(<App />);
+      wrapper.setState({ pets: [...wrapper.state().pets, trident] });
       wrapper
         .find(PetBrowser)
         .props()
-        .onAdoptPet('somePetId');
-      expect(wrapper.state().adoptedPets).to.deep.equal(false);
+        .onAdoptPet(trident.id);
+
+      expect(wrapper.state().pets).to.deep.equal([{ ...trident, isAdopted: true }]);
     });
   });
 });

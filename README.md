@@ -20,7 +20,7 @@ Call `npm i && npm start` to run this project in your browser
 
 On a high level, you will be working on several components that form the UI of the animal shelter adoption application. Users can filter for pets by type, and can adopt a pet of their choosing. Once a pet is adopted, they cannot un-adopt it. No backsies!
 
-There are several components that need your attention. All of these components can be found in the `components/` folder. Starting from the top and following the data down:
+There are several components that need your attention. All of these components can be found in the `components/` folder. Starting from the top and working our way down:
 
 ### `App`
 
@@ -30,7 +30,7 @@ There are several components that need your attention. All of these components c
 
   * The URL of the API is `/api/pets` with an **optional query parameter**.
   * Use app's `state.filters` to create this parameter
-  * If the `type` is `'all'`, send a request to `/api/pets?type=all`
+  * If the `type` is `'all'`, send a request to `/api/pets`
   * If the `type` is `'cat'`, send a request to `/api/pets?type=cat`. Do the same thing for `dog` and `micropig`.
   * Finally, set App's `state.pets` so you can pass this data down as props to `<PetBrowser />`
 
@@ -49,7 +49,6 @@ There are several components that need your attention. All of these components c
 1.  Should have a `pets` prop. This is an array of pets that the component uses to render `<Pet />` components. App should determine which pets to pass down as props. App should be responsible for filtering this list based on the types of pets the user wants to see.
 
 * Should have an `onAdoptPet` prop. This callback prop gets passed to its `<Pet />` children components.
-* Should have an `adoptedPets` prop. Use this prop to figure out if a pet is adopted or not, and pass that result to the `<Pet />` components in the form of an `isAdopted` prop.
 
 ### `Pet`
 
