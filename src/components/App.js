@@ -9,7 +9,7 @@ class App extends React.Component {
 
     this.state = {
       pets: [],
-      adoptedPets: [],
+      // adoptedPets: [],
       filters: {
         type: 'all',
       },
@@ -32,8 +32,11 @@ class App extends React.Component {
     this.setState({ ...this.state.filters, ...{ type: animal } });
   };
 
-  onAdoptPet = pet => {
-    this.setState({ ...this.state.adoptedPets, pet });
+  onAdoptPet = petId => {
+    // Array.prototype.map returns a copy of pets
+    // if we find the target pet, return a copy of it where isAdopted is true using the spread operator
+    const pets = this.state.pets.map(p => (p.id === petId ? { ...p, isAdopted: true } : p));
+    this.setState({ pets });
   };
 
   render() {
