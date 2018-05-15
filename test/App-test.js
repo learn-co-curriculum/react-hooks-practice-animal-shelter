@@ -10,15 +10,16 @@ import PetBrowser from '../src/components/PetBrowser';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+const FILTERS_STATE = {
+  type: 'all'
+};
+
 describe('<App />', () => {
   describe('Filters', () => {
     it('should change filter type', () => {
-      const wrapper = shallow(<App />);
-      wrapper
-        .find(Filters)
-        .props()
-        .onChangeType('micropig');
-      expect(wrapper.state().filters.type).to.equal('micropig');
+      const spy = sinon.spy();
+      const wrapper = shallow(<Filters onChangeType={spy} filters={FILTERS_STATE} />);
+      wrapper.find('select').simulate('change', { target: { value: 'dog' } });
     });
   });
 

@@ -18,7 +18,6 @@ describe('<Filters />', () => {
       const wrapper = shallow(<Filters onChangeType={spy} filters={FILTERS_STATE} />);
       wrapper.find('select').simulate('change', { target: { value: 'dog' } });
       expect(spy.calledOnce).to.be.true;
-      expect(spy.firstCall.args[0]).to.equal('dog');
     });
   });
 
