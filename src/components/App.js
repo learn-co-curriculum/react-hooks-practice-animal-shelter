@@ -10,8 +10,8 @@ class App extends React.Component {
     this.state = {
       pets: [],
       filters: {
-        type: 'all',
-      },
+        type: 'all'
+      }
     };
   }
 

@@ -45,8 +45,8 @@ describe('<App />', () => {
       ['cat', 'dog', 'micropig'].forEach(type => {
         wrapper.setState({
           filters: Object.assign({}, wrapper.state().filters, {
-            type: type,
-          }),
+            type: type
+          })
         });
         wrapper
           .find(Filters)
@@ -70,11 +70,11 @@ describe('<App />', () => {
         age: 4,
         weight: 1,
         name: 'Trident',
-        isAdopted: false,
+        isAdopted: false
       };
     });
 
-    it('should toggle a pets adopted status', () => {
+    it("should toggle a pet's adopted status", () => {
       const wrapper = shallow(<App />);
       wrapper.setState({ pets: [...wrapper.state().pets, trident] });
       wrapper

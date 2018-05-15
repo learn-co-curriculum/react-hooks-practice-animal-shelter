@@ -8,7 +8,7 @@ import Filters from '../src/components/Filters';
 Enzyme.configure({ adapter: new Adapter() });
 
 const FILTERS_STATE = {
-  type: 'all',
+  type: 'all'
 };
 
 describe('<Filters />', () => {
