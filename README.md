@@ -42,7 +42,8 @@ There are several components that need your attention. All of these components c
 
 ## Resources
 
-- [Forms](https://facebook.github.io/react/docs/forms.html)
-- [Events](https://facebook.github.io/react/docs/events.html)
+- [Forms](https://reactjs.org/docs/forms.html)
+- [Events](https://reactjs.org/docs/events.html)
+- [Lifting State Up](https://reactjs.org/docs/lifting-state-up.html)
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/react-props-and-state-lab'>Props And State Lab</a> on Learn.co and start learning to code for free.</p>
