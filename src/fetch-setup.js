@@ -1,7 +1,6 @@
 import fetchMock from 'fetch-mock';
-import { getAll, getByType } from'./data/pets';
+import { getAll, getByType } from './data/pets';
 import 'whatwg-fetch';
-
 
 fetchMock.get('/api/pets', getAll());
 fetchMock.get('/api/pets?type=cat', getByType('cat'));

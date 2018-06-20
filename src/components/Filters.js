@@ -1,10 +1,6 @@
-import React from 'react';
+import React from 'react'
 
 class Filters extends React.Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <div className="ui form">
@@ -22,8 +18,8 @@ class Filters extends React.Component {
           <button className="ui secondary button">Find pets</button>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Filters;
+export default Filters
