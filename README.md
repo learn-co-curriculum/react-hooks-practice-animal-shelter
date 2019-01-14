@@ -22,6 +22,8 @@ You'll have a much better time seeing the results in the browser.
 
 Call `npm i && npm start` to run this project in your browser
 
+## Instructions
+
 On a high level, you will be working on several components that form the UI of
 the animal shelter adoption application. Users can filter for pets by type, and
 can adopt a pet of their choosing. Once a pet is adopted, they cannot un-adopt
@@ -54,6 +56,9 @@ working our way down through all its descendants:
 * **Even though we're using `fetch` here, its responses have been mocked in
   order to make the tests work properly. That means it's important to use the
   _exact_ URLs as described above, or your tests will fail!**
+
+The pet data received should include information on individual pets and their
+adoption status.
 
 ### `Filters`
 
