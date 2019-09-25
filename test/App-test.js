@@ -75,7 +75,7 @@ describe('<App />', () => {
       };
     });
 
-    it("should toggle a pet's adopted status", () => {
+    it("should set a pet's adopted status to true", () => {
       const wrapper = shallow(<App />);
       wrapper.setState({ pets: [...wrapper.state().pets, trident] });
       wrapper
