@@ -86,7 +86,7 @@ working our way down through all its descendants:
     Based on the pet's `gender`, the component also needs to contain either a
     male (`♂`) or female (`♀`) symbol.
 
-2.  Should receive an `isAdopted` prop. Using this prop, render the correct button in the pet's card; if the pet is adopted, show the disabled button. Otherwise,mshow the primary button to adopt the pet.
+2.  Should receive an `isAdopted` prop. Using this prop, render the correct button in the pet's card; if the pet is adopted, show the disabled button. Otherwise, show the primary button to adopt the pet.
 
 3.  Should receive an `onAdoptPet` callback prop. This callback prop gets called with the pet's `id` when the user clicks the adopt pet button — _not_ when they click the disabled button!
 
