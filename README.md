@@ -53,14 +53,15 @@ working our way down through all its descendants:
   - If the `type` is `'all'`, send a request to `/api/pets`
   - If the `type` is `'cat'`, send a request to `/api/pets?type=cat`. Do the
     same thing for `dog` and `micropig`.
-  - Finally set `<App/>`'s `state.pets` with the results of your fetch request
+  - The pet data received will include information on individual pets and their adoption status.
+    
+4. Finally set `<App/>`'s `state.pets` with the results of your fetch request
     so you can pass the pet data down as props to `<PetBrowser />`
 
   - **Even though we're using `fetch` here, its responses have been mocked in
   order to make the tests work properly. That means it's important to use the
   _exact_ URLs as described above, or your tests will fail!**
 
-  - The pet data received should include information on individual pets and their adoption status.
 
 ### `Filters`
 
