@@ -1,38 +1,21 @@
-import React from "react";
+import React from 'react'
 
-import Filters from "./Filters";
-import PetBrowser from "./PetBrowser";
-import { getAll } from "../data/pets";
+import Filters from './Filters'
+import PetBrowser from './PetBrowser'
 
 class App extends React.Component {
   constructor() {
-    super();
+    super()
 
     this.state = {
       pets: [],
       filters: {
-        type: "all"
+        type: 'all'
       }
-    };
-
-    // this.adoptPet = this.adoptPet.bind(this)
+    }
   }
-
-  componentDidMount() {
-    this.setState({
-      pets: getAll()
-    })
-  }
-  
-  adoptPet = id => {
-    const pets = this.state.pets.map(pet => {
-      return pet.id === id ? { ...pet, isAdopted: true } : pet;
-    });
-    this.setState({ pets });
-  };
 
   render() {
-    console.log(this.state);
     return (
       <div className="ui container">
         <header>
@@ -44,13 +27,13 @@ class App extends React.Component {
               <Filters />
             </div>
             <div className="twelve wide column">
-              <PetBrowser pets={this.state.pets} adoptPet={this.adoptPet} />
+              <PetBrowser />
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
