@@ -24,7 +24,7 @@
     "enzyme-adapter-react-16": "^1.0.1",
     "expect": "^21.2.1",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.3.3",
     "sinon": "^1.17.7",
     "whatwg-fetch": "^2.0.3"
   },
