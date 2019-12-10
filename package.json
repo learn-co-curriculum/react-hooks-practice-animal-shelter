@@ -6,15 +6,15 @@
     "fetch-mock": "^5.9.4",
     "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
-    "react-scripts": "^1.0.7",
+    "react-scripts": "^3.3.0",
     "react-test-renderer": "^16.0.0",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^3.1.11"
+    "webpack": "^4.41.2",
+    "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
     "babel-core": "^6.22.1",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "8.0.6",
     "babel-preset-airbnb": "^2.1.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.22.0",
@@ -35,5 +35,17 @@
     "dev:hot": "webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./",
     "test:watch": "npm run test -- --watch",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
