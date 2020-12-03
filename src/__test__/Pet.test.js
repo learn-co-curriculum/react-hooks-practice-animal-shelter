@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import Enzyme, { shallow } from 'enzyme';
 import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
-import Pet from '../src/components/Pet';
+import Pet from '../components/Pet';
 
 Enzyme.configure({ adapter: new Adapter() });
 

@@ -46,11 +46,11 @@ descendants:
 
 ### `App`
 
-1.  The app's initial state is already defined. App has two children: the
+1. The app's initial state is already defined. App has two children: the
     `<Filters />` and `<PetBrowser />` components.
 
 2. App should pass a **callback** prop, `onChangeType`, to `<Filters />`. This
-   callback needs to update `<App />`'s `state.filters.type`
+   callback needs to update `<App />`'s `filters.type` state.
 
 3. `<Filters />` needs a **callback** prop, `onFindPetsClick`. When the
    `<Filters />` component calls `onFindPetsClick`, `<App />` should fetch a
@@ -65,22 +65,22 @@ descendants:
   - The pet data received will include information on individual pets and their
     adoption status.
 
-4. Set `<App/>`'s `state.pets` with the results of your fetch request so
+4. Set `<App/>`'s `pets` state with the results of your fetch request so
     you can pass the pet data down as props to `<PetBrowser />`
 
   - **Even though we're using `fetch` here, its responses have been mocked in
     order to make the tests work properly. That means it's important to use the
     _exact_ URLs as described above, or your tests will fail!**
 
-5. Finally, App should pass a **callback** prop, `onAdoptPet`, to `<PetBrowser
+5. Finally, `App` should pass a **callback** prop, `onAdoptPet`, to `<PetBrowser
    />`. This callback should take in an id for a pet, find the matching pet in
-   `state.pets` and set the `isAdopted` property to `true`.
+   the `pets` array in `App`, and set the `isAdopted` property to `true`.
 
 ### `Filters`
 
 1.  Should receive an `onChangeType` callback prop. This callback prop gets
     called whenever the value of the `<select>` element changes with the
-    **value** of the `<select>`
+    **value** of the `<select>`.
 
 2.  Should receive an `onFindPetsClick` callback prop. This callback prop gets
     called when the users clicks the 'Find pets' button.
@@ -113,7 +113,6 @@ descendants:
 
 ## Resources
 
-- [Forms](https://facebook.github.io/react/docs/forms.html)
-- [Events](https://facebook.github.io/react/docs/events.html)
-- [Using State Correctly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly)
-- [State Updates May Be Asynchronous](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous)
+- [Forms](https://reactjs.org/docs/forms.html)
+- [Events](https://reactjs.org/docs/handling-events.html)
+- [Using the State Hook](https://reactjs.org/docs/hooks-state.html)

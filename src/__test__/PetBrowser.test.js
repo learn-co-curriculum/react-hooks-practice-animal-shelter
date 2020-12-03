@@ -1,11 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
 import Enzyme, { shallow } from 'enzyme';
-import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
-import { getAll } from '../src/data/pets';
-import Pet from '../src/components/Pet';
-import PetBrowser from '../src/components/PetBrowser';
+
+import { getAll } from '../data/pets';
+import Pet from '../components/Pet';
+import PetBrowser from '../components/PetBrowser';
 
 Enzyme.configure({ adapter: new Adapter() });
 
