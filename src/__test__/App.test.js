@@ -1,90 +1,52 @@
 import React from 'react';
-import { expect } from 'chai';
-import Enzyme, { shallow } from 'enzyme';
-import sinon from 'sinon';
-import Adapter from 'enzyme-adapter-react-16';
-
-import fetchMock from '../fetch-setup';
+import { render, fireEvent, screen } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import { server } from '../mocks/server'
+import { getAll, getByType } from '../mocks/data'
 import App from '../components/App';
-import Filters from '../components/Filters';
-import PetBrowser from '../components/PetBrowser';
-
-Enzyme.configure({ adapter: new Adapter() });
-
-const FILTERS_STATE = {
-  type: 'all'
-};
 
 describe('<App />', () => {
-  describe('Filters', () => {
-    it('should change filter type', () => {
-      const spy = sinon.spy();
-      const wrapper = shallow(<Filters onChangeType={spy} filters={FILTERS_STATE} />);
-      wrapper.find('select').simulate('change', { target: { value: 'dog' } });
-    });
-  });
-
   describe('Fetching pets', () => {
-    beforeEach(() => {
-      fetchMock.reset();
+    beforeAll(() => server.listen())
+    afterEach(() => server.resetHandlers())
+    afterAll(() => server.close())
+
+    it('should fetch all pets by default', async () => {
+      render(<App />)
+
+      fireEvent.click(screen.getByText(/Find pets/))
+
+      await screen.findAllByTestId("pet")
+
+      expect(screen.getAllByTestId("pet")).toHaveLength(getAll().length)
     });
 
-    it('should fetch all pets by default', () => {
-      const wrapper = shallow(<App />);
-      wrapper
-        .find(Filters)
-        .props()
-        .onFindPetsClick();
-      expect(
-        fetchMock.called('/api/pets'),
-        'The right API URL is not being fetched when finding pets.'
-      ).to.be.true;
-    });
+    it('should fetch pet types using the type parameter based on the filter', async () => {
+      render(<App />)
 
-    it('should fetch pet types using the type parameter based on the filter', () => {
-      const wrapper = shallow(<App />);
+      let type = 'micropig'
+      fireEvent.change(screen.getByLabelText(/type/), { target: { value: type }})
 
-      ['cat', 'dog', 'micropig'].forEach(type => {
-        wrapper.setState({
-          filters: Object.assign({}, wrapper.state().filters, {
-            type: type
-          })
-        });
-        wrapper
-          .find(Filters)
-          .props()
-          .onFindPetsClick();
-        expect(
-          fetchMock.called(`/api/pets?type=${type}`),
-          'The right API URL is not being fetched when finding pets.'
-        ).to.be.true;
-      });
+      fireEvent.click(screen.getByText(/Find pets/))
+
+      await screen.findAllByTestId("pet")
+
+      expect(screen.getAllByTestId("pet")).toHaveLength(getByType(type).length)
     });
   });
 
   describe('Adopting pets', () => {
-    let trident;
-    beforeEach(() => {
-      trident = {
-        id: '5c142d9e-ea45-4231-8146-cccf71c704c0',
-        type: 'dog',
-        gender: 'male',
-        age: 4,
-        weight: 1,
-        name: 'Trident',
-        isAdopted: false
-      };
-    });
+    it("should set a pet's adopted status to true", async () => {
+      render(<App />)
 
-    it("should set a pet's adopted status to true", () => {
-      const wrapper = shallow(<App />);
-      wrapper.setState({ pets: [...wrapper.state().pets, trident] });
-      wrapper
-        .find(PetBrowser)
-        .props()
-        .onAdoptPet(trident.id);
+      fireEvent.click(screen.getByText(/Find pets/))
 
-      expect(wrapper.state().pets).to.deep.equal([{ ...trident, isAdopted: true }]);
+      const buttons = await screen.findAllByText(/Adopt pet/)
+      const button = buttons[0]
+
+      fireEvent.click(button)
+
+      expect(button.textContent).toContain("Already adopted")
     });
   });
 });

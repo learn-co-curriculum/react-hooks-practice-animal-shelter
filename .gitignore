@@ -48,3 +48,9 @@ yarn.lock
 
 # DS_Store 
 .DS_Store
+
+# Learn-specific .results.json
+.results.json
+
+# Ignore ESLint files
+.eslintcache
