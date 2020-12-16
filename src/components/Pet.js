@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
 
 function Pet({ pet, onAdoptPet }) {
-
   function handleAdoptedClick() {
-    onAdoptPet(pet.id)  
+    onAdoptPet(pet.id);
   }
 
   return (
@@ -22,13 +21,16 @@ function Pet({ pet, onAdoptPet }) {
         </div>
       </div>
       <div className="extra content">
-        {pet.isAdopted 
-          ? <button className="ui disabled button">Already adopted</button>
-          : <button className="ui primary button" onClick={handleAdoptedClick}>Adopt pet</button>
-        }
+        {pet.isAdopted ? (
+          <button className="ui disabled button">Already adopted</button>
+        ) : (
+          <button className="ui primary button" onClick={handleAdoptedClick}>
+            Adopt pet
+          </button>
+        )}
       </div>
     </div>
-  )
+  );
 }
 
-export default Pet
+export default Pet;
