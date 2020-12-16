@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Filters() {
   return (
@@ -17,7 +17,7 @@ function Filters() {
         <button className="ui secondary button">Find pets</button>
       </div>
     </div>
-  )
+  );
 }
 
-export default Filters
+export default Filters;

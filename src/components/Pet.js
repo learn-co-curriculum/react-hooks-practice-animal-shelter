@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Pet() {
   return (
@@ -21,7 +21,7 @@ function Pet() {
         <button className="ui primary button">Adopt pet</button>
       </div>
     </div>
-  )
+  );
 }
 
-export default Pet
+export default Pet;

@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import Filters from './Filters'
-import PetBrowser from './PetBrowser'
+import Filters from "./Filters";
+import PetBrowser from "./PetBrowser";
 
 function App() {
-  const [pets, setPets] = useState([])
-  const [filters, setFilters] = useState({ type: 'all' })
-  
+  const [pets, setPets] = useState([]);
+  const [filters, setFilters] = useState({ type: "all" });
+
   return (
     <div className="ui container">
       <header>
@@ -23,7 +23,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
