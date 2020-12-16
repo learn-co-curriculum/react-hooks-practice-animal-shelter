@@ -1,31 +1,35 @@
-import React from 'react';
-import { expect } from 'chai';
-import Enzyme, { shallow } from 'enzyme';
-import sinon from 'sinon';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import Filters from '../components/Filters';
+import React from "react";
+import { expect } from "chai";
+import Enzyme, { shallow } from "enzyme";
+import sinon from "sinon";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import Filters from "../components/Filters";
 
 Enzyme.configure({ adapter: new Adapter() });
 
 const FILTERS_STATE = {
-  type: 'all'
+  type: "all",
 };
 
-describe('<Filters />', () => {
-  describe('Animal type', () => {
-    it('should call the `onChangeType` prop callback when the animal type select changes', () => {
+describe("<Filters />", () => {
+  describe("Animal type", () => {
+    it("should call the `onChangeType` prop callback when the animal type select changes", () => {
       const spy = sinon.spy();
-      const wrapper = shallow(<Filters onChangeType={spy} filters={FILTERS_STATE} />);
-      wrapper.find('select').simulate('change', { target: { value: 'dog' } });
+      const wrapper = shallow(
+        <Filters onChangeType={spy} filters={FILTERS_STATE} />
+      );
+      wrapper.find("select").simulate("change", { target: { value: "dog" } });
       expect(spy.calledOnce).to.be.true;
     });
   });
 
-  describe('Finding pets', () => {
+  describe("Finding pets", () => {
     it('should call the `onFindPetsClick` callback prop when the "Find pets" button is clicked', () => {
       const spy = sinon.spy();
-      const wrapper = shallow(<Filters onFindPetsClick={spy} filters={FILTERS_STATE} />);
-      wrapper.find('button.secondary.button').simulate('click');
+      const wrapper = shallow(
+        <Filters onFindPetsClick={spy} filters={FILTERS_STATE} />
+      );
+      wrapper.find("button.secondary.button").simulate("click");
       expect(spy.calledOnce).to.be.true;
     });
   });
