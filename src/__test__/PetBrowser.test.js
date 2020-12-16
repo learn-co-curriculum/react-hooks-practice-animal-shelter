@@ -3,7 +3,7 @@ import { expect } from "chai";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
-import { getAll } from "../mocks/data";
+import { getAll } from "./mocks/data";
 import Pet from "../components/Pet";
 import PetBrowser from "../components/PetBrowser";
 
