@@ -1,4 +1,4 @@
-# React Props and State Lab
+# Practice Challenge: Animal Shelter
 
 ## Overview
 
@@ -51,7 +51,7 @@ descendants:
 ### `App`
 
 1. The app's initial state is already defined. App has two children: the
-    `<Filters />` and `<PetBrowser />` components.
+   `<Filters />` and `<PetBrowser />` components.
 
 2. App should pass a **callback** prop, `onChangeType`, to `<Filters />`. This
    callback needs to update `<App />`'s `filters.type` state.
@@ -60,20 +60,19 @@ descendants:
    `<Filters />` component calls `onFindPetsClick`, `<App />` should fetch a
    list of pets using `fetch()`.
 
-  - Assuming your app is up and running, you can make a fetch to this exact URL:
-    `http://localhost:3001/pets` with an **optional query parameter** to get your data.
-  - Use `App`'s state.filters to control/update this parameter
-  - If the `type` is `'all'`, send a request to `/pets`
-  - If the `type` is `'cat'`, send a request to `/pets?type=cat`. Do the
-    same thing for `dog` and `micropig`.
-  - The pet data received will include information on individual pets and their
-    adoption status.
+- Assuming your app is up and running, you can make a fetch to this exact URL:
+  `http://localhost:3001/pets` with an **optional query parameter** to get your data.
+- Use `App`'s state.filters to control/update this parameter
+- If the `type` is `'all'`, send a request to `/pets`
+- If the `type` is `'cat'`, send a request to `/pets?type=cat`. Do the
+  same thing for `dog` and `micropig`.
+- The pet data received will include information on individual pets and their
+  adoption status.
 
 4. Set `<App/>`'s `pets` state with the results of your fetch request, and
-    pass the pet data down as a prop to `<PetBrowser />`
+   pass the pet data down as a prop to `<PetBrowser />`
 
-5. Finally, `App` should pass a **callback** prop, `onAdoptPet`, to `<PetBrowser
-   />`. This callback should take in an id for a pet, find the matching pet in
+5. Finally, `App` should pass a **callback** prop, `onAdoptPet`, to `<PetBrowser />`. This callback should take in an id for a pet, find the matching pet in
    the `pets` array in `App`, and set the `isAdopted` property to `true`.
 
 ### `Filters`
