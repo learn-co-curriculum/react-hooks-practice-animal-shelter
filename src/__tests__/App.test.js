@@ -1,8 +1,8 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { server } from "./mocks/server";
-import { getAll, getByType } from "./mocks/data";
+import { server } from "../mocks/server";
+import { getAll, getByType } from "../mocks/data";
 import App from "../components/App";
 
 beforeAll(() => server.listen());
