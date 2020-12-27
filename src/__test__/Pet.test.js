@@ -1,11 +1,7 @@
 import React from "react";
-import { expect } from "chai";
-import Enzyme, { shallow } from "enzyme";
-import sinon from "sinon";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { render, fireEvent, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import Pet from "../components/Pet";
-
-Enzyme.configure({ adapter: new Adapter() });
 
 const MALE_DOG = {
   id: "9e7cc723-d7f5-440d-8ead-c311e68014ee",
@@ -30,90 +26,102 @@ const FEMALE_CAT = {
 const GENDER_ICON_MALE = "♂";
 const GENDER_ICON_FEMALE = "♀";
 
-describe("<Pet />", () => {
-  describe("Rendering props", () => {
-    it("should render the name", () => {
-      const wrapper = shallow(<Pet pet={MALE_DOG} />);
-      expect(wrapper.text().includes(MALE_DOG.name)).to.be.true;
+describe("Rendering props", () => {
+  test("renders the name", () => {
+    render(<Pet pet={MALE_DOG} />);
+    expect(
+      screen.queryByText(MALE_DOG.name, { exact: false })
+    ).toBeInTheDocument();
+  });
+
+  test("renders the correct gender icon for male pets", () => {
+    render(<Pet pet={MALE_DOG} />);
+    expect(
+      screen.queryByText(GENDER_ICON_MALE, { exact: false })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(GENDER_ICON_FEMALE, { exact: false })
+    ).not.toBeInTheDocument();
+  });
+
+  test("renders the correct gender icon for female pets", () => {
+    render(<Pet pet={FEMALE_CAT} />);
+    expect(
+      screen.queryByText(GENDER_ICON_MALE, { exact: false })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(GENDER_ICON_FEMALE, { exact: false })
+    ).toBeInTheDocument();
+  });
+
+  test("renders the pet type", () => {
+    render(<Pet pet={FEMALE_CAT} />);
+    expect(
+      screen.queryByText(FEMALE_CAT.type, { exact: false })
+    ).toBeInTheDocument();
+  });
+
+  it("renders the pet age", () => {
+    render(<Pet pet={FEMALE_CAT} />);
+    expect(
+      screen.queryByText(FEMALE_CAT.age.toString(), { exact: false })
+    ).toBeInTheDocument();
+  });
+
+  it("renders the pet weight", () => {
+    render(<Pet pet={FEMALE_CAT} />);
+    expect(
+      screen.queryByText(FEMALE_CAT.weight.toString(), { exact: false })
+    ).toBeInTheDocument();
+  });
+});
+
+describe("Adopting a pet", () => {
+  describe("Pet is not adopted yet", () => {
+    test("only shows the adopt button", () => {
+      render(<Pet pet={FEMALE_CAT} />);
+      expect(screen.queryByText(/Adopt pet/)).toBeInTheDocument();
+      expect(screen.queryByText(/Already adopted/)).not.toBeInTheDocument();
     });
 
-    it("should render the correct gender icon for male pets", () => {
-      const wrapper = shallow(<Pet pet={MALE_DOG} />);
-      expect(
-        wrapper.text().includes(GENDER_ICON_MALE) &&
-          !wrapper.text().includes(GENDER_ICON_FEMALE)
-      ).to.be.true;
+    test("calls the `onAdoptPet` callback prop when the adopt button is clicked", () => {
+      const onAdoptPet = jest.fn();
+      render(<Pet pet={FEMALE_CAT} onAdoptPet={onAdoptPet} />);
+
+      const button = screen.queryByText(/Adopt pet/);
+      fireEvent.click(button);
+
+      expect(onAdoptPet).toHaveBeenCalled();
     });
 
-    it("should render the correct gender icon for female pets", () => {
-      const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-      expect(
-        wrapper.text().includes(GENDER_ICON_FEMALE) &&
-          !wrapper.text().includes(GENDER_ICON_MALE)
-      ).to.be.true;
-    });
+    test("calls the `onAdoptPet` callback prop with the pet ID", () => {
+      const onAdoptPet = jest.fn();
+      render(<Pet pet={FEMALE_CAT} onAdoptPet={onAdoptPet} />);
 
-    it("should render the pet type", () => {
-      const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-      expect(wrapper.text().includes(FEMALE_CAT.type)).to.be.true;
-    });
+      const button = screen.queryByText(/Adopt pet/);
+      fireEvent.click(button);
 
-    it("should render the pet age", () => {
-      const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-      expect(wrapper.text().includes(FEMALE_CAT.age)).to.be.true;
-    });
-
-    it("should render the pet weight", () => {
-      const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-      expect(wrapper.text().includes(FEMALE_CAT.weight)).to.be.true;
+      expect(onAdoptPet).toHaveBeenCalledWith(FEMALE_CAT.id);
     });
   });
 
-  describe("Adopting a pet", () => {
-    describe("Pet is not adopted yet", () => {
-      it("should only show the adopt button", () => {
-        const wrapper = shallow(<Pet pet={FEMALE_CAT} />);
-        expect(
-          wrapper.find("button.ui.primary.button").length === 1 &&
-            wrapper.find("button.ui.disabled.button").length === 0
-        ).to.be.true;
-      });
-
-      it("should call the `onAdoptPet` callback prop when the adopt button is clicked", () => {
-        const spy = sinon.spy();
-        const wrapper = shallow(<Pet pet={FEMALE_CAT} onAdoptPet={spy} />);
-        wrapper.find("button.ui.primary.button").simulate("click");
-        expect(spy.calledOnce).to.be.true;
-        expect(spy.firstCall.args[0]).to.equal(FEMALE_CAT.id);
-      });
-
-      it("should call the `onAdoptPet` callback prop with the pet ID", () => {
-        const spy = sinon.spy();
-        const wrapper = shallow(<Pet pet={FEMALE_CAT} onAdoptPet={spy} />);
-        wrapper.find("button.ui.primary.button").simulate("click");
-        expect(spy.firstCall.args[0]).to.equal(FEMALE_CAT.id);
-      });
+  describe("Pet is already adopted", () => {
+    test("only shows the already adopted button", () => {
+      render(<Pet pet={{ ...FEMALE_CAT, isAdopted: true }} />);
+      expect(screen.queryByText(/Adopt pet/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/Already adopted/)).toBeInTheDocument();
     });
 
-    describe("Pet is already adopted", () => {
-      it("should only show the already adopted button", () => {
-        const wrapper = shallow(
-          <Pet pet={{ ...FEMALE_CAT, isAdopted: true }} />
-        );
-        expect(
-          wrapper.find("button.ui.disabled.button").length === 1 &&
-            wrapper.find("button.ui.primary.button").length === 0
-        ).to.be.true;
-      });
+    test("does not call the `onAdoptPet` callback prop when the button is clicked", () => {
+      const onAdoptPet = jest.fn();
+      render(
+        <Pet pet={{ ...FEMALE_CAT, isAdopted: true }} onAdoptPet={onAdoptPet} />
+      );
 
-      it("should not call the `onAdoptPet` callback prop when the button is clicked", () => {
-        const spy = sinon.spy();
-        const wrapper = shallow(
-          <Pet pet={{ ...FEMALE_CAT, isAdopted: true }} onAdoptPet={spy} />
-        );
-        wrapper.find("button.ui.disabled.button").simulate("click");
-        expect(spy.called).to.be.false;
-      });
+      const button = screen.queryByText(/Already adopted/);
+      fireEvent.click(button);
+
+      expect(onAdoptPet).not.toHaveBeenCalled();
     });
   });
 });

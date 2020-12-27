@@ -1,30 +1,52 @@
 import React from "react";
-import { expect } from "chai";
-import Enzyme, { shallow } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-
-import { getAll } from "./mocks/data";
-import Pet from "../components/Pet";
+import { render, fireEvent, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import PetBrowser from "../components/PetBrowser";
 
-Enzyme.configure({ adapter: new Adapter() });
+const testPets = [
+  {
+    id: "5c142d9e-ea45-4231-8146-cccf71c704c0",
+    type: "dog",
+    gender: "male",
+    age: 4,
+    weight: 1,
+    name: "Trident",
+    isAdopted: false,
+  },
+  {
+    id: "2c902312-dfa3-446f-8b4b-5e115170d807",
+    type: "cat",
+    gender: "male",
+    age: 3,
+    weight: 1,
+    name: "Teddy",
+    isAdopted: false,
+  },
+  {
+    id: "6057de4f-6725-4b9f-a0b1-1f3bd3ad04a6",
+    type: "cat",
+    gender: "male",
+    age: 2,
+    weight: 5,
+    name: "Hemingway",
+    isAdopted: false,
+  },
+];
 
-const ALL_PETS = getAll();
+test("renders Pet components based on its props", () => {
+  render(<PetBrowser pets={testPets} />);
 
-describe("<PetBrowser />", () => {
-  it("should render Pet components based on its props", () => {
-    const wrapper = shallow(<PetBrowser pets={ALL_PETS} />);
-    expect(wrapper.find(Pet).length).to.equal(ALL_PETS.length);
-  });
+  for (const pet of testPets) {
+    expect(screen.queryByText(pet.name, { exact: false })).toBeInTheDocument();
+  }
+});
 
-  it("should pass an `onAdoptPet` callback prop to its children Pet components", () => {
-    const noop = () => {};
-    const wrapper = shallow(<PetBrowser pets={ALL_PETS} onAdoptPet={noop} />);
-    expect(
-      wrapper
-        .find(Pet)
-        .getElements()
-        .every((node) => node.props.onAdoptPet === noop)
-    ).to.be.true;
-  });
+test("passes an `onAdoptPet` callback prop to its children Pet components", () => {
+  const onAdoptPet = jest.fn();
+  render(<PetBrowser pets={testPets} onAdoptPet={onAdoptPet} />);
+
+  const button = screen.queryAllByText(/Adopt pet/)[0];
+  fireEvent.click(button);
+
+  expect(onAdoptPet).toHaveBeenCalled();
 });
