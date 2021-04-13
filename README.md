@@ -20,11 +20,12 @@ We **strongly** recommend completing this lab using Behavior Driven Development
 (BDD)––test the functionality in the browser **before** running the tests.
 You'll have a much better time seeing the results in the browser.
 
-Call `npm i && npm start` to run this project in your browser.
+Run `npm install` to install our dependencies.
 
-**NOTE** Running `npm start` will run `json-server` in addition to React, so
-that you can make `fetch` requests to `http://localhost:3001/pets` to get pet
-data for our app.
+Then, run `npm run server` to start up `json-server` on `http://localhost:3001`.
+
+In another tab, run `npm start` to start up our React app at
+`http://localhost:3000`.
 
 ## Deliverables
 
@@ -60,8 +61,9 @@ descendants:
    `<Filters />` component calls `onFindPetsClick`, `<App />` should fetch a
    list of pets using `fetch()`.
 
-   - Assuming your app is up and running, you can make a fetch to this exact URL:
-     `http://localhost:3001/pets` with an **optional query parameter** to get your data.
+   - Assuming `json-server` is up and running, you can make a fetch to this
+     exact URL: `http://localhost:3001/pets` with an **optional query
+     parameter** to get your data.
    - Use `App`'s state.filters to control/update this parameter
    - If the `type` is `'all'`, send a request to `/pets`
    - If the `type` is `'cat'`, send a request to `/pets?type=cat`. Do the
@@ -72,8 +74,10 @@ descendants:
 4. Set `<App/>`'s `pets` state with the results of your fetch request, and
    pass the pet data down as a prop to `<PetBrowser />`
 
-5. Finally, `App` should pass a **callback** prop, `onAdoptPet`, to `<PetBrowser />`. This callback should take in an id for a pet, find the matching pet in
-   the `pets` array in `App`, and set the `isAdopted` property to `true`.
+5. Finally, `App` should pass a **callback** prop, `onAdoptPet`, to
+   `<PetBrowser />`. This callback should take in an id for a pet, find the
+   matching pet in the `pets` array in `App`, and set the `isAdopted` property
+   to `true`.
 
 ### `Filters`
 
