@@ -2,7 +2,7 @@ import React from "react";
 
 function Pet() {
   return (
-    <div className="card">
+    <div className="card" data-testid="pet">
       <div className="content">
         <span className="header">
           {/*'♀' OR '♂' */}
