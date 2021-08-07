@@ -1,14 +1,15 @@
 import React from "react";
 
 function Pet({pet,onAdoptPet}) {
- let {name,type,age,weight,isAdopted}=pet
- let Adopted=`ui ${isAdopted?"":"disabled"} button`
- let isAdoptedCss=`ui primary ${isAdopted?"disabled":" "} button`
+ let {name,type,age,weight,isAdopted,gender,id}=pet
+
+
   return (
     <div className="card" data-testid="pet">
       <div className="content">
         <span className="header">
-          {/*'♀' OR '♂' */}
+        {gender === "female" ? "♀" : "♂"}
+          {name}
        {name}
         </span>
         <div className="meta">
@@ -19,9 +20,12 @@ function Pet({pet,onAdoptPet}) {
           <p>Weight: {weight}</p>
         </div>
       </div>
-      <div className="extra content">
-        <button className={Adopted} >Already adopted</button>
-        <button className={isAdoptedCss} onClick={onAdoptPet}>Adopt pet</button>
+      <div className="extra content">{
+        isAdopted? <button className="ui disabled button" >Already adopted</button>
+        :<button className="ui primary button" onClick={()=>onAdoptPet(id)}>Adopt pet</button>
+      }
+       
+        
       </div>
     </div>
   );
