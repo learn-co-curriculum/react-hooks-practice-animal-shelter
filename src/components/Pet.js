@@ -10,7 +10,7 @@ function Pet({pet,onAdoptPet}) {
         <span className="header">
         {gender === "female" ? "♀" : "♂"}
           {name}
-       {name}
+       
         </span>
         <div className="meta">
           <span className="date">{type}</span>
