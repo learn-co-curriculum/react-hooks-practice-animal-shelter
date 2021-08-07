@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Filters from "./Filters";
 import PetBrowser from "./PetBrowser";
@@ -12,15 +12,17 @@ function App() {
 
     if (filters.type === "all") {
       request = await fetch("http://localhost:3001/pets");
+    }else{
+      request = await fetch(`http://localhost:3001/pets?type=${filters.type}`);
     }
-
-    request = await fetch(`http://localhost:3001/pets?type=${filters.type}`);
-
     const data = await request.json();
-    setPets(data.pets);
+  
+    setPets(data); 
+     
   };
 
   const handleChangeType = (e) => {
+    
     setFilters({ type: e.target.value });
   };
 
