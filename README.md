@@ -1,4 +1,4 @@
-# [Optional] Practice Challenge: Animal Shelter
+# Practice Challenge: Animal Shelter
 
 ## Overview
 
