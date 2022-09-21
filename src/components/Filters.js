@@ -1,6 +1,7 @@
 import React from "react";
-
+import  { useState} from 'react'
 function Filters() {
+  const [filter, setfilter] = useState('all');
   return (
     <div className="ui form">
       <h3>Animal type</h3>
