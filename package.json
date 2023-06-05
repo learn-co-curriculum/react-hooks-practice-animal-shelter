@@ -1,5 +1,5 @@
 {
-  "name": "rework",
+  "name": "react-hooks-practice-animal-shelter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,8 +12,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "json-server --watch db.json -p 3001",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "echo \".results.json\" && react-scripts test --reporters=@learn-co-curriculum/jest-learn-reporter --reporters=default --watchAll",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
